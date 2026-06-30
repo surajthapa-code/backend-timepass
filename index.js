@@ -1,16 +1,35 @@
-require("dotenv").config();
-const express = require("express");
+import express from "express";
 const app = express();
-const port = 6000;
 
 app.get("/", (req, res) => {
-  res.send("Hello World! suraj here");
+  res.json({
+    message: "hello dude",
+  });
+});
+app.get("/categories/:category/products/:product", (req, res) => {
+  // const category = req.params.category;
+  // const product = req.params.product;
+
+  //--->better
+
+  const { category, product } = req.params;
+  res.json({
+    id: 243,
+    // category: category,
+    // product: product,
+
+    //----> better
+
+    category,
+    product,
+    content: {
+      name: product,
+      price: "2344", //rough data just for practice prps
+      description: `this product is in discount, Buy this ${product} now`,
+    },
+  });
 });
 
-app.get("/suraj", (req, res) => {
-  res.send("this is for suraj");
-});
-
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(3000, () => {
+  console.log(`serving on PORT http://localhost:${3000}`);
 });
