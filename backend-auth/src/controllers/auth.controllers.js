@@ -1,3 +1,11 @@
-import { userModel } from "../models/user.model";
+import { userModel } from "../models/user.model.js";
 
-export async function registerUser(req, res) {}
+export async function registerUser(req, res) {
+  const { username, email, password } = req.body;
+  
+  const user = await userModel.create({
+    username,
+    email,
+    password,
+  });
+}
